@@ -9,7 +9,7 @@ from django.views import generic
 from django.views.generic.edit import CreateView, DeleteView, UpdateView
 
 from .forms import RenewBookForm
-from .models import Author, Book, BookInstance, Genre
+from .models import Author, Book, BookInstance, Genre, Language
 
 def index(request):
     """
@@ -88,6 +88,22 @@ def renew_book_librarian(request, pk):
 
     return render(request, 'catalog/book_renew_librarian.html', {'form': form, 'bookinst': book_inst})
 
+class LanguageCreate(PermissionRequiredMixin, CreateView):
+    permission_required = 'catalog.add_language'
+    model = Language
+    fields = ['name']
+    success_url = reverse_lazy('languages')
+
+class LanguageUpdate(PermissionRequiredMixin, UpdateView):
+    permission_required = 'catalog.change_language'
+    model = Language
+    fields = ['name']
+    success_url = reverse_lazy('languages')
+
+class LanguageListView(generic.ListView):
+    model = Language
+    paginate_by = 10
+
 class AuthorCreate(CreateView):
     model = Author
     fields = '__all__'
@@ -101,3 +117,46 @@ class AuthorDelete(DeleteView):
     model = Author
     success_url = reverse_lazy('authors')
 
+class BookCreate(CreateView):
+    model = Book
+    fields = '__all__'
+
+class BookUpdate(UpdateView):
+    model = Book
+    fields = '__all__'
+
+class BookDelete(DeleteView):
+    model = Book
+    success_url = reverse_lazy('books')
+
+class GenreCreate(PermissionRequiredMixin, CreateView):
+    permission_required = 'catalog.add_genre'
+    model = Genre
+    fields = ['name']
+    success_url = reverse_lazy('genres')
+
+class GenreUpdate(PermissionRequiredMixin, UpdateView):
+    permission_required = 'catalog.change_genre'
+    model = Genre
+    fields = ['name']
+    success_url = reverse_lazy('genres')
+
+class GenreListView(generic.ListView):
+    model = Genre
+    paginate_by = 10
+
+class LanguageCreate(PermissionRequiredMixin, CreateView):
+    permission_required = 'catalog.add_language'
+    model = Language
+    fields = ['name']
+    success_url = reverse_lazy('languages')
+
+class LanguageUpdate(PermissionRequiredMixin, UpdateView):
+    permission_required = 'catalog.change_language'
+    model = Language
+    fields = ['name']
+    success_url = reverse_lazy('languages')
+
+class LanguageListView(generic.ListView):
+    model = Language
+    paginate_by = 10

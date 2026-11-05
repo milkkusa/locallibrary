@@ -47,6 +47,10 @@
               <ul class="sidebar-nav">
                 <li class="sidebar-nav-heading">Staff</li>
                 <li><a href="{% url 'all-borrowed' %}">All borrowed</a></li>
+                <li><a href="{% url 'genre_create' %}">Create genre</a></li>
+                <li><a href="{% url 'language_create' %}">Create language</a></li>
+                <li><a href="{% url 'author_create' %}">Create author</a></li>
+                <li><a href="{% url 'book_create' %}">Create book</a></li>
               </ul>
             {% endif %}
           {% endblock %}
