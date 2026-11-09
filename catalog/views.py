@@ -144,3 +144,9 @@ class LanguageUpdate(PermissionRequiredMixin, UpdateView):
 class LanguageListView(generic.ListView):
     model = Language
     paginate_by = 10
+
+class BookInstanceCreate(PermissionRequiredMixin, CreateView):
+    permission_required = 'catalog.can_mark_returned'  # Доступ только библиотекарям
+    model = BookInstance
+    fields = ['book', 'imprint', 'due_back', 'borrower', 'status']
+    success_url = reverse_lazy('all-borrowed')
