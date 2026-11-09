@@ -88,22 +88,6 @@ def renew_book_librarian(request, pk):
 
     return render(request, 'catalog/book_renew_librarian.html', {'form': form, 'bookinst': book_inst})
 
-class LanguageCreate(PermissionRequiredMixin, CreateView):
-    permission_required = 'catalog.add_language'
-    model = Language
-    fields = ['name']
-    success_url = reverse_lazy('languages')
-
-class LanguageUpdate(PermissionRequiredMixin, UpdateView):
-    permission_required = 'catalog.change_language'
-    model = Language
-    fields = ['name']
-    success_url = reverse_lazy('languages')
-
-class LanguageListView(generic.ListView):
-    model = Language
-    paginate_by = 10
-
 class AuthorCreate(CreateView):
     model = Author
     fields = '__all__'
